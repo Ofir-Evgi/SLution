@@ -3,9 +3,9 @@ A hand-detection-based application for translating sign language into text in re
 
 # Detailed Requirements
 
-## Names & ID:
-- **Ofir Evgi**: 207441346  
-- **Omer Shukroon**: 208540856  
+## Names:
+- **Ofir Evgi**  
+- **Omer Shukroon**  
 
 ---
 
