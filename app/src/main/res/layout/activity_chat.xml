@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ChatActivity">
+
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/green">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back_arrow"
+            app:tint="@android:color/white"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="Back button"
+            android:layout_margin="15dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/chatTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Sign Language Translator"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/oleo_script_bold"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/header_layout"
+        android:layout_above="@id/messageInputLayout"
+        android:overScrollMode="never"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        tools:listitem="@layout/item_favorite_message"
+        />
+
+    <ImageButton
+        android:id="@+id/cameraFab"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/camera"
+        android:scaleType="centerInside"
+        android:background="@android:color/transparent"
+        android:contentDescription="Open camera"
+        android:layout_alignParentEnd="true"
+        app:tint="@color/green"
+        android:layout_margin="16dp"
+        android:layout_above="@id/messageInputLayout"
+        android:translationZ="8dp" />
+
+    <RelativeLayout
+        android:id="@+id/messageInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/messageInputWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="56dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/messageEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Type your message here..."
+                android:textSize="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/voiceButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/mic"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:contentDescription="Record voice"
+            android:layout_marginStart="8dp"
+            app:tint="@color/green"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

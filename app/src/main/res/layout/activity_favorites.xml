@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".FavoritesActivity">
+
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/green">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/favTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/favorite_messages"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/oleo_script_bold"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back_arrow"
+            app:tint="@android:color/white"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="Back button"
+            android:layout_margin="15dp"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoritesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_layout"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentBottom="true"
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_favorite_message" />
+
+    <LinearLayout
+        android:id="@+id/emptyLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:paddingTop="24dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/emptyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_favorites"
+            android:textStyle="bold"
+            android:textColor="#607D8B"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/emptyImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/empty"
+            android:contentDescription="@string/empty_image_desc"
+            app:tint="@color/green"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+</RelativeLayout>
