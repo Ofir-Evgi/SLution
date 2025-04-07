@@ -50,7 +50,7 @@ public class ChatActivity extends AppCompatActivity {
         chatRecyclerView.setAdapter(chatAdapter);
 
         findViewById(R.id.backButton).setOnClickListener(v -> {
-            Intent intent = new Intent(ChatActivity.this, FavoritesActivity.class);
+            Intent intent = new Intent(ChatActivity.this, HomeActivity.class);
             intent.putExtra("favorites", new ArrayList<>(chatAdapter.getFavoriteMessages()));
             startActivity(intent);
         });

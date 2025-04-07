@@ -1,5 +1,6 @@
 package com.example.slution;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -38,6 +39,12 @@ public class FavoritesActivity extends AppCompatActivity {
             favoritesRecyclerView.setAdapter(adapter);
         }
 
-        findViewById(R.id.backButton).setOnClickListener(v -> finish());
+        findViewById(R.id.backButton).setOnClickListener(v -> {
+            Intent intent = new Intent(FavoritesActivity.this, HomeActivity.class); // שנה ל־MainActivity או איך שקוראים למסך הבית שלך
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
+
     }
 }
