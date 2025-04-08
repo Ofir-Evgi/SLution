@@ -36,7 +36,12 @@ public class CameraFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_camera_fragment, container, false);
+
         previewView = new PreviewView(requireContext());
+        previewView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        ));
 
         ViewGroup cameraContainer = view.findViewById(R.id.camera);
         cameraContainer.addView(previewView);

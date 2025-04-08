@@ -5,13 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.google.android.material.textview.MaterialTextView;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavViewHolder> {
@@ -40,6 +37,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavV
         holder.starIcon.setOnClickListener(v -> {
             int pos = holder.getAdapterPosition();
             if (pos != RecyclerView.NO_POSITION) {
+                FavoriteStorage.removeFavorite(context, item);
                 favoriteMessages.remove(pos);
                 notifyItemRemoved(pos);
             }

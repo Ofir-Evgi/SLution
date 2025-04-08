@@ -25,8 +25,7 @@ public class FavoritesActivity extends AppCompatActivity {
         favoritesRecyclerView = findViewById(R.id.favoritesRecyclerView);
         emptyLayout = findViewById(R.id.emptyLayout);
 
-        ArrayList<ChatItem> favoriteMessages = (ArrayList<ChatItem>) getIntent().getSerializableExtra("favorites");
-        if (favoriteMessages == null) favoriteMessages = new ArrayList<>();
+        ArrayList<ChatItem> favoriteMessages = new ArrayList<>(FavoriteStorage.loadFavorites(this));
 
         if (favoriteMessages.isEmpty()) {
             emptyLayout.setVisibility(View.VISIBLE);
@@ -40,11 +39,10 @@ public class FavoritesActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.backButton).setOnClickListener(v -> {
-            Intent intent = new Intent(FavoritesActivity.this, HomeActivity.class); // שנה ל־MainActivity או איך שקוראים למסך הבית שלך
+            Intent intent = new Intent(FavoritesActivity.this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         });
-
     }
 }

@@ -12,74 +12,63 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
 
-    private final List<ChatItem> chatList;
-    private final Set<ChatItem> favoriteMessages = new HashSet<>();
+    private final List<ChatItem> chatMessages;
 
-    public ChatAdapter(List<ChatItem> chatList) {
-        this.chatList = chatList;
-    }
-
-    public Set<ChatItem> getFavoriteMessages() {
-        return favoriteMessages;
+    public ChatAdapter(List<ChatItem> chatMessages) {
+        this.chatMessages = chatMessages;
     }
 
     @NonNull
     @Override
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_chat_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_card, parent, false);
         return new ChatViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
-        ChatItem item = chatList.get(position);
+        ChatItem item = chatMessages.get(position);
         Context context = holder.itemView.getContext();
 
-        holder.nameText.setText(item.getUserName());
-        holder.timeText.setText(item.getTime());
+        holder.messageText.setText(item.getUserName());
+        holder.messageTime.setText(item.getTime());
 
-        boolean isFavorite = favoriteMessages.contains(item);
-        updateStarIcon(holder.starIcon, context, isFavorite);
+        updateStarIcon(holder.starIcon, context, item);
 
         holder.starIcon.setOnClickListener(v -> {
-            boolean nowFavorite;
-            if (favoriteMessages.contains(item)) {
-                favoriteMessages.remove(item);
-                nowFavorite = false;
+            boolean isFavorited = FavoriteStorage.isFavorite(context, item);
+            if (isFavorited) {
+                FavoriteStorage.removeFavorite(context, item);
             } else {
-                favoriteMessages.add(item);
-                nowFavorite = true;
+                FavoriteStorage.addFavorite(context, item);
             }
-            updateStarIcon(holder.starIcon, context, nowFavorite);
+            updateStarIcon(holder.starIcon, context, item);
         });
-    }
-
-    private void updateStarIcon(ImageView starIcon, Context context, boolean isFavorite) {
-        int color = ContextCompat.getColor(context, isFavorite ? R.color.yellow : R.color.gray);
-        starIcon.setColorFilter(color);
     }
 
     @Override
     public int getItemCount() {
-        return chatList.size();
+        return chatMessages.size();
+    }
+
+    private void updateStarIcon(ImageView starIcon, Context context, ChatItem item) {
+        boolean isFavorited = FavoriteStorage.isFavorite(context, item);
+        int colorRes = isFavorited ? R.color.yellow : R.color.gray;
+        starIcon.setColorFilter(ContextCompat.getColor(context, colorRes));
     }
 
     static class ChatViewHolder extends RecyclerView.ViewHolder {
-        MaterialTextView nameText;
-        MaterialTextView timeText;
+        MaterialTextView messageText, messageTime;
         ImageView starIcon;
 
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameText = itemView.findViewById(R.id.chat_name);
-            timeText = itemView.findViewById(R.id.chat_time);
+            messageText = itemView.findViewById(R.id.chat_name);
+            messageTime = itemView.findViewById(R.id.chat_time);
             starIcon = itemView.findViewById(R.id.star_icon);
         }
     }

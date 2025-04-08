@@ -1,9 +1,11 @@
 package com.example.slution;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +39,15 @@ public class ProfileActivity extends AppCompatActivity {
         btnApplyChanges.setOnClickListener(v -> {
             saveUserData();
             Toast.makeText(this, "Changes saved", Toast.LENGTH_SHORT).show();
+        });
+
+        // כפתור back → חזרה ל־HomeActivity
+        ImageView backArrow = findViewById(R.id.back_arrow);
+        backArrow.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
         });
     }
 
