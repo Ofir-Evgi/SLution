@@ -29,13 +29,11 @@ Includes developers, investors, and system managers responsible for:
 ### **End Users**
 
 #### Registration and Login:
-- Users can register in the app with personal details (e.g., email and password).  
+- Users can register in the app with personal details (e.g.,google account , email and password).  
 - Users can securely log into the app.  
 
 #### User Profile Management:
 - Users can update their personal details (e.g., name, email, password).  
-- Users can select their preferred sign language: **Hebrew Sign Language (ISL)** or **English Sign Language (ASL)**.  
-- When the user selects their preferred sign language in their profile, the system will automatically set the default text language for conversations to the chosen language.  
 
 #### Navigation from the Home Screen:
 Users can access the following functions from the home screen:  
@@ -106,10 +104,7 @@ The screen is divided into two sections:
 
 ### Usability:
 - The app interface will be intuitive and suitable for users with varying levels of technological proficiency.  
-- Accessibility features will include:
-  - Font size adjustment.  
-  - High contrast themes.  
-  - Screen reader support.  
+
 
 ### Compatibility:
 - The app will be compatible with **Android**.  
@@ -123,6 +118,6 @@ The screen is divided into two sections:
 - The system will support **English** in the user interface.  
 
 ### Data Management:
-- The system will automatically save the **last 10 conversations**.  
+- The system will automatically save the **recent conversations**.  
 - Sentences marked as favorites will be stored separately for quick retrieval.  
 
