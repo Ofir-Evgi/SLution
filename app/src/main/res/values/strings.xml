@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SLution</string>
+    <string name="favorite_messages">Favorite Messages</string>
+    <string name="no_favorites">No favorite messages yet</string>
+    <string name="sample_message">Message here</string>
+    <string name="empty_image_desc">Illustration shown when no favorite messages</string>
+    <string name="favorite_icon">Favorite icon</string>
+
+</resources>
+
+
+
+
+
+

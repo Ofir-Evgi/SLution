@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="11dp">
+
+        <!-- Chat Avatar Circle -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/chat_avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="#E8F5F7"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/no_messages"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#00B2C9" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/chat_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/chat_time"
+            app:layout_constraintStart_toEndOf="@id/chat_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Sign Language Conversation" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/chat_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#9E9E9E"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/chat_name"
+            tools:text="3:45 PM" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/chat_message_preview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#757575"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/star_icon"
+            app:layout_constraintStart_toStartOf="@id/chat_name"
+            app:layout_constraintTop_toBottomOf="@id/chat_name"
+            tools:text="This is the last message from the conversation that might be long..." />
+
+        <ImageView
+            android:id="@+id/star_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="Favorite icon"
+            android:src="@drawable/fav_icon"
+            app:layout_constraintBottom_toBottomOf="@id/chat_message_preview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/chat_message_preview"
+            app:tint="#E0E0E0" />
+
+        <!-- Unread Indicator Dot (optional) -->
+        <View
+            android:id="@+id/unread_indicator"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="4dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/chat_name"
+            app:layout_constraintStart_toEndOf="@id/chat_name"
+            app:layout_constraintTop_toTopOf="@id/chat_name"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

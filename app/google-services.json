@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "600124499212",
+    "project_id": "slution-24489",
+    "storage_bucket": "slution-24489.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600124499212:android:74fc0bcf267c02e7b91529",
+        "android_client_info": {
+          "package_name": "com.example.slution"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600124499212-s0n4rmlv14ud2o0rnd3vj1hbint2spif.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.slution",
+            "certificate_hash": "14e9789ec030152ea93b990cecd9dbacb493e515"
+          }
+        },
+        {
+          "client_id": "600124499212-aa0ubejemovn5p6kaua1u7a6k2804h19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR96rD1ULkcpkc3owSDjAK5lRrft270Sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600124499212-aa0ubejemovn5p6kaua1u7a6k2804h19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
