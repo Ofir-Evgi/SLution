@@ -1,135 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#F5F5F5"
     tools:context=".ChatActivity">
 
-    <RelativeLayout
-        android:id="@+id/header_layout"
+    <!-- Top Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/green">
+        android:layout_height="?attr/actionBarSize"
+        android:background="#00B2C9"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/back_arrow"
-            app:tint="@android:color/white"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="Back button"
-            android:layout_margin="15dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/chatTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Chat"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/oleo_script_bold"
-            />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Back"
+                android:padding="12dp"
+                android:src="@drawable/back_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#FFFFFF" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chatRecyclerView"
+            <TextView
+                android:id="@+id/chat_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Chat"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/oleo_script_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/back_button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/camera_nav_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Open Camera"
+                android:padding="12dp"
+                android:src="@drawable/camera"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#FFFFFF" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Empty State View (shown when no messages) -->
+    <LinearLayout
+        android:id="@+id/empty_state_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/header_layout"
-        android:layout_above="@id/messageInputLayout"
-        android:overScrollMode="never"
-        android:layout_marginTop="8dp"
-        android:padding="4dp"
-        tools:listitem="@layout/item_favorite_message"
-        />
-
-
-    <LinearLayout
-        android:id="@+id/emptyLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
-        android:visibility="gone"
-        android:layout_marginTop="20dp">
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/message_input_container"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/no_messages"
-            app:tint="@color/green"
-            android:contentDescription="No messages icon" />
+        <FrameLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:contentDescription="No Messages"
+                android:src="@drawable/no_messages"
+                app:tint="#00B2C9" />
+        </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Theres no messages"
-            android:textSize="18sp"
-            android:textColor="#888888"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="16dp"
+            android:text="No messages yet"
+            android:textColor="#757575"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Send a message or use camera to translate sign language"
+            android:textColor="#9E9E9E"
+            android:textSize="14sp" />
     </LinearLayout>
 
+    <!-- Messages Recycler View -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messages_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/message_input_container"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:listitem="@layout/item_chat_card" />
 
-    <ImageButton
-        android:id="@+id/cameraFab"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/camera"
-        android:scaleType="centerInside"
-        android:background="@android:color/transparent"
-        android:contentDescription="Open camera"
-        android:layout_alignParentEnd="true"
-        app:tint="@color/green"
-        android:layout_margin="16dp"
-        android:layout_above="@id/messageInputLayout"
-        android:translationZ="8dp" />
-
-    <RelativeLayout
-        android:id="@+id/messageInputLayout"
+    <!-- Message Input Container -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/message_input_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="8dp">
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/messageInputWrapper"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginEnd="45dp">
+            android:padding="8dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/messageEditText"
-                android:layout_width="match_parent"
+            <!-- Microphone Button on the left -->
+            <ImageView
+                android:id="@+id/mic_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Record Voice"
+                android:padding="8dp"
+                android:src="@drawable/mic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/green" />
+
+            <!-- Text Input Field -->
+            <EditText
+                android:id="@+id/message_input"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Type your message here..."
-                android:textSize="12sp"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@null"
+                android:hint="Type a message..."
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:minHeight="40dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#212121"
+                android:textColorHint="#9E9E9E"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/camera_button"
+                app:layout_constraintStart_toEndOf="@id/mic_button"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/voiceButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/mic"
-            android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            android:contentDescription="Record voice"
-            android:layout_marginStart="8dp"
-            app:tint="@color/green"
-            />
+            <!-- Camera Button -->
+            <ImageView
+                android:id="@+id/camera_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Open Camera"
+                android:padding="8dp"
+                android:src="@drawable/camera"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/send_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/green" />
 
-    </RelativeLayout>
+            <!-- Send Button - Added to layout instead of programmatically -->
+            <ImageView
+                android:id="@+id/send_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Send Message"
+                android:padding="8dp"
+                android:src="@android:drawable/ic_menu_send"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/green" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

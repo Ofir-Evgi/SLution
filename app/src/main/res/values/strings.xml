@@ -5,6 +5,7 @@
     <string name="sample_message">Message here</string>
     <string name="empty_image_desc">Illustration shown when no favorite messages</string>
     <string name="favorite_icon">Favorite icon</string>
+
 </resources>
 
 

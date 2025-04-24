@@ -4,13 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,13 +22,12 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recentConversationsRecycler;
     private ChatAdapter adapter;
     private List<ChatItem> chatList;
-    private MaterialButton btnNewChat, btnViewFavorites;
-    private ImageView profileIcon;
-    private LinearLayout emptyLayout;
-
+    private MaterialCardView newChatCard, favoritesCard;
+    private ShapeableImageView profileButton;
+    private ConstraintLayout emptyStateContainer;
     private DatabaseReference chatsRef;
 
     @Override
@@ -35,15 +35,18 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        recyclerView = findViewById(R.id.recycler_chats);
-        btnNewChat = findViewById(R.id.btn_new_chat);
-        btnViewFavorites = findViewById(R.id.btn_view_favorites);
-        profileIcon = findViewById(R.id.profile_icon);
-        emptyLayout = findViewById(R.id.emptyLayout);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Initialize UI components
+        recentConversationsRecycler = findViewById(R.id.recent_conversations_recycler);
+        newChatCard = findViewById(R.id.new_chat_card);
+        favoritesCard = findViewById(R.id.favorites_card);
+        profileButton = findViewById(R.id.profile_button);
+        emptyStateContainer = findViewById(R.id.empty_state_container);
+
+        // Setup RecyclerView
+        recentConversationsRecycler.setLayoutManager(new LinearLayoutManager(this));
         chatList = new ArrayList<>();
         adapter = new ChatAdapter(chatList);
-        recyclerView.setAdapter(adapter);
+        recentConversationsRecycler.setAdapter(adapter);
 
         adapter.setOnItemClickListener(item -> {
             Intent intent = new Intent(HomeActivity.this, ChatActivity.class);
@@ -52,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Initialize Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://slution-24489-default-rtdb.europe-west1.firebasedatabase.app/");
         chatsRef = database.getReference("chats");
 
@@ -75,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        btnNewChat.setOnClickListener(v -> {
+        newChatCard.setOnClickListener(v -> {
             String chatId = chatsRef.push().getKey();
             if (chatId != null) {
                 ChatItem newChat = new ChatItem(chatId, "Chat #" + (chatList.size() + 1), "", "");
@@ -87,12 +91,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        btnViewFavorites.setOnClickListener(v -> {
+        favoritesCard.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, FavoritesActivity.class);
             startActivity(intent);
         });
 
-        profileIcon.setOnClickListener(v -> {
+        profileButton.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
             startActivity(intent);
         });
@@ -100,11 +104,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private void toggleEmptyState(boolean isEmpty) {
         if (isEmpty) {
-            emptyLayout.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
+            emptyStateContainer.setVisibility(View.VISIBLE);
+            recentConversationsRecycler.setVisibility(View.GONE);
         } else {
-            emptyLayout.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
+            emptyStateContainer.setVisibility(View.GONE);
+            recentConversationsRecycler.setVisibility(View.VISIBLE);
         }
     }
 }
