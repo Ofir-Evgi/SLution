@@ -7,8 +7,9 @@ Upon tapping the START button, users are navigated to the **Google Authenticatio
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/de8ba859-1228-4a91-a9d2-01532e0b4f25" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Welcome_Screen.jpg" alt="Welcome Screen" width="400"/>
 </p>
+
 
 <br><br>
 
@@ -21,8 +22,9 @@ The app logo is displayed prominently to maintain brand identity. Once the user 
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/581ce02b-f362-427c-8844-30da47137437" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Sign_In_Screen.jpg" alt="Sign In Screen" width="400"/>
 </p>
+
 
 <br><br>
 
@@ -42,8 +44,9 @@ This screen provides quick access to essential features, enhancing user experien
 
 ### When accessing the home screen for the first time, without any chat history, the following screen will appear.
 
+
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/b099a129-417e-4d76-8427-bd013458bb25" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Home_Screen_Empty.jpg" alt="Home Screen - No Conversations" width="400"/>
 </p>
 
 
@@ -55,7 +58,7 @@ By clicking on one of the chats, the full conversation view is displayed, includ
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/99a2487c-0d4c-4475-94a3-fbf43bca7ab2" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Home_Screen_Full.jpg" alt="Home Screen with Active Chats" width="400"/>
 </p>
 
 
@@ -64,12 +67,13 @@ By clicking on one of the chats, the full conversation view is displayed, includ
 
 # Translation Chat Screen
 
-### When clicking the "New Translation Chat" button, the following screen is displayed:
+### When clicking the "New Chat" button, the following screen is displayed:
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/f8266386-23d1-4ec1-b47e-9b80f5fda4c4" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Chat_Screen_Empty.jpg" alt="Empty Chat Screen" width="400"/>
 </p>
+
 
 <br><br>
 
@@ -89,8 +93,9 @@ All messages are stored in the database and displayed in a chat-like format, all
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/6615de7e-b3dd-48a6-baf5-611dfc8b7c7d" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Chat_Screen_Full.jpg" alt="Chat Screen with Messages" width="400"/>
 </p>
+
 
 <br><br>
 
@@ -99,8 +104,9 @@ This feature is designed to assist individuals who want to respond verbally to s
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/cff16be8-ad92-4bb8-aa40-5b3471c12eaa" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Speech_To_Text.jpg" alt="Speech to Text Feature in Action" width="400"/>
 </p>
+
 
 <br><br>
 
@@ -111,8 +117,9 @@ A confirmation button is provided to verify the accuracy of the translation and 
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/445511f3-267d-4b6b-86fb-31abe2912b54" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Translation_Screen.jpg" alt="Translation Screen - Camera Input" width="400"/>
 </p>
+
 
 <br><br>
 
@@ -128,8 +135,9 @@ It provides quick and easy access to frequently used or important phrases, allow
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/0c281910-1048-4a87-a476-31a81e113093" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Favorite_Messages_Empty.jpg" alt="Empty Favorite Messages Screen" width="400"/>
 </p>
+
 
 <br><br>
 
@@ -137,8 +145,9 @@ It provides quick and easy access to frequently used or important phrases, allow
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/6c822e72-d45a-4357-a678-54c1485a87f3" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Favorite_Messages_Full.jpg" alt="Favorite Messages List" width="400"/>
 </p>
+
 
 <br><br>
 
@@ -150,5 +159,6 @@ Any changes made are saved to the app’s database and reflected throughout the 
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/f509f072-9fcb-4dde-8eb5-e7de58b4c750" alt="תמונה של WhatsApp" width="400"/>
+  <img src="assets/Profile_Screen.jpg" alt="User Profile Screen" width="400"/>
 </p>
+
