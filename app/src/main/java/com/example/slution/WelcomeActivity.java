@@ -28,7 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         Animation slideDown = AnimationUtils.loadAnimation(this, R.anim.slide_down);
         Animation scaleUpFadeIn = AnimationUtils.loadAnimation(this, R.anim.scale_up_fade_in);
-        Animation bounceIn = AnimationUtils.loadAnimation(this, R.anim.bounce_in); // נוסיף מיד
+        Animation bounceIn = AnimationUtils.loadAnimation(this, R.anim.bounce_in);
 
         title.startAnimation(slideDown);
 

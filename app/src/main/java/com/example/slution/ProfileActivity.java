@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -38,7 +39,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
 
-    // Firebase
     private FirebaseUser currentUser;
     private DatabaseReference userRef;
 
@@ -47,20 +47,15 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // Initialize views
         initializeViews();
-
-        // Initialize Firebase
         initializeFirebase();
 
-        // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("user_profile", MODE_PRIVATE);
-
-        // Set up click listeners
         setupClickListeners();
 
-        // Fetch user data
-        fetchUserData();
+        //if (userRef != null) {
+            //fetchUserData();
+        //}
     }
 
     private void initializeViews() {
@@ -77,7 +72,6 @@ public class ProfileActivity extends AppCompatActivity {
         if (currentUser != null) {
             userRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
         } else {
-            // User not logged in, redirect to login screen
             Toast.makeText(this, "Please log in to access your profile", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
             finish();
@@ -85,13 +79,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
-        // Back button click listener
         ImageView backArrow = findViewById(R.id.back_arrow);
-        backArrow.setOnClickListener(v -> {
-            onBackPressed();
-        });
+        backArrow.setOnClickListener(v -> onBackPressed());
 
-        // Save changes button click listener
         btnApplyChanges.setOnClickListener(v -> {
             if (validateInputs()) {
                 showLoading(true);
@@ -103,19 +93,16 @@ public class ProfileActivity extends AppCompatActivity {
     private boolean validateInputs() {
         boolean isValid = true;
 
-        // Validate first name
         if (TextUtils.isEmpty(etFirstName.getText())) {
             etFirstName.setError("First name is required");
             isValid = false;
         }
 
-        // Validate last name
         if (TextUtils.isEmpty(etSurname.getText())) {
             etSurname.setError("Last name is required");
             isValid = false;
         }
 
-        // Validate email
         String email = etEmail.getText() != null ? etEmail.getText().toString() : "";
         if (TextUtils.isEmpty(email)) {
             etEmail.setError("Email is required");
@@ -130,44 +117,44 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void fetchUserData() {
         showLoading(true);
+        Log.d(TAG, "Fetching user data...");
 
-        // Try to load data from SharedPreferences first for faster UI rendering
+        if (userRef == null) {
+            Log.e(TAG, "userRef is null, cannot fetch data");
+            showLoading(false);
+            return;
+        }
+
         loadUserDataFromPreferences();
 
-        // Then fetch the latest data from Firebase
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d(TAG, "Firebase data fetched");
                 showLoading(false);
 
-                if (dataSnapshot.exists()) {
-                    // Update UI with data from Firebase
-                    if (dataSnapshot.hasChild("first_name")) {
-                        etFirstName.setText(dataSnapshot.child("first_name").getValue(String.class));
+                if (snapshot.exists()) {
+                    if (snapshot.hasChild("first_name")) {
+                        etFirstName.setText(snapshot.child("first_name").getValue(String.class));
                     }
-
-                    if (dataSnapshot.hasChild("surname")) {
-                        etSurname.setText(dataSnapshot.child("surname").getValue(String.class));
+                    if (snapshot.hasChild("surname")) {
+                        etSurname.setText(snapshot.child("surname").getValue(String.class));
                     }
-
-                    if (dataSnapshot.hasChild("email")) {
-                        etEmail.setText(dataSnapshot.child("email").getValue(String.class));
+                    if (snapshot.hasChild("email")) {
+                        etEmail.setText(snapshot.child("email").getValue(String.class));
                     }
-
-                    // Save the freshly fetched data to SharedPreferences
                     saveUserDataToPreferences();
                 } else if (currentUser != null) {
-                    // No data exists yet, try to get from Google Auth if available
+                    Log.d(TAG, "No data in DB, using FirebaseUser info");
                     String displayName = currentUser.getDisplayName();
                     String email = currentUser.getEmail();
 
                     if (displayName != null && !displayName.isEmpty()) {
-                        String[] nameParts = displayName.split(" ");
-                        if (nameParts.length > 0) {
-                            etFirstName.setText(nameParts[0]);
-
-                            if (nameParts.length > 1) {
-                                etSurname.setText(nameParts[nameParts.length - 1]);
+                        String[] parts = displayName.split(" ");
+                        if (parts.length > 0) {
+                            etFirstName.setText(parts[0]);
+                            if (parts.length > 1) {
+                                etSurname.setText(parts[parts.length - 1]);
                             }
                         }
                     }
@@ -179,10 +166,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 showLoading(false);
+                Log.e(TAG, "Database error: " + error.getMessage());
                 Snackbar.make(findViewById(android.R.id.content),
-                        "Error fetching profile data: " + databaseError.getMessage(),
+                        "Error fetching profile: " + error.getMessage(),
                         Snackbar.LENGTH_LONG).show();
             }
         });
@@ -204,6 +192,12 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void performDatabaseUpdate(Map<String, Object> updates) {
+        if (userRef == null) {
+            showLoading(false);
+            Toast.makeText(this, "Cannot update: user not found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         userRef.updateChildren(updates)
                 .addOnSuccessListener(aVoid -> {
                     showLoading(false);
@@ -215,7 +209,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     showLoading(false);
                     Snackbar.make(findViewById(android.R.id.content),
-                            "Failed to update profile: " + e.getMessage(),
+                            "Update failed: " + e.getMessage(),
                             Snackbar.LENGTH_LONG).show();
                 });
     }
@@ -229,22 +223,19 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void showLoading(boolean show) {
-        loadingOverlay.setVisibility(show ? View.VISIBLE : View.GONE);
+        if (loadingOverlay != null) {
+            loadingOverlay.setVisibility(show ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
     public void onBackPressed() {
-        // Check if there are unsaved changes
         if (hasUnsavedChanges()) {
             new MaterialAlertDialogBuilder(this)
                     .setTitle("Unsaved Changes")
                     .setMessage("You have unsaved changes. Do you want to discard them?")
-                    .setPositiveButton("Discard", (dialog, which) -> {
-                        super.onBackPressed();
-                    })
-                    .setNegativeButton("Stay", (dialog, which) -> {
-                        dialog.dismiss();
-                    })
+                    .setPositiveButton("Discard", (dialog, which) -> super.onBackPressed())
+                    .setNegativeButton("Stay", (dialog, which) -> dialog.dismiss())
                     .show();
         } else {
             super.onBackPressed();

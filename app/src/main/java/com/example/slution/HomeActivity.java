@@ -35,14 +35,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Initialize UI components
         recentConversationsRecycler = findViewById(R.id.recent_conversations_recycler);
         newChatCard = findViewById(R.id.new_chat_card);
         favoritesCard = findViewById(R.id.favorites_card);
         profileButton = findViewById(R.id.profile_button);
         emptyStateContainer = findViewById(R.id.empty_state_container);
 
-        // Setup RecyclerView
         recentConversationsRecycler.setLayoutManager(new LinearLayoutManager(this));
         chatList = new ArrayList<>();
         adapter = new ChatAdapter(chatList);
@@ -55,7 +53,6 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Initialize Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://slution-24489-default-rtdb.europe-west1.firebasedatabase.app/");
         chatsRef = database.getReference("chats");
 

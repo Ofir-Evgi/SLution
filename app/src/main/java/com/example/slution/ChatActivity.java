@@ -39,7 +39,6 @@ public class ChatActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chat);
 
-        // Fix: Use content view instead of findViewById with non-existent ID
         View rootView = findViewById(android.R.id.content);
         ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -50,7 +49,6 @@ public class ChatActivity extends AppCompatActivity {
         chatId = getIntent().getStringExtra("chatId");
         chatUser = getIntent().getStringExtra("chatUser");
 
-        // Initialize UI components
         TextView title = findViewById(R.id.chat_title);
         title.setText(chatUser != null ? chatUser : "Chat");
 
@@ -63,13 +61,11 @@ public class ChatActivity extends AppCompatActivity {
         ImageView backButton = findViewById(R.id.back_button);
         ImageView cameraNavButton = findViewById(R.id.camera_nav_button);
 
-        // Initialize RecyclerView
         messages = new ArrayList<>();
         chatAdapter = new ChatAdapter(messages);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatRecyclerView.setAdapter(chatAdapter);
 
-        // Initialize Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://slution-24489-default-rtdb.europe-west1.firebasedatabase.app/");
         messagesRef = database.getReference("chats").child(chatId).child("messages");
 
@@ -88,7 +84,6 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 chatAdapter.notifyDataSetChanged();
 
-                // After loading messages, scroll to the bottom
                 if (!messages.isEmpty()) {
                     chatRecyclerView.scrollToPosition(messages.size() - 1);
                 }
@@ -103,7 +98,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        // Send button click listener
         sendButton.setOnClickListener(v -> {
             String message = messageEditText.getText().toString().trim();
             if (!message.isEmpty()) {
@@ -111,12 +105,10 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        // Microphone button click listener
         micButton.setOnClickListener(v -> {
             startVoiceRecognition();
         });
 
-        // Camera button click listener for opening the translation
         cameraButton.setOnClickListener(v -> {
             Intent intent = new Intent(ChatActivity.this, TranslationActivity.class);
             intent.putExtra("chatId", chatId);
@@ -124,7 +116,6 @@ public class ChatActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Camera nav button in toolbar
         cameraNavButton.setOnClickListener(v -> {
             Intent intent = new Intent(ChatActivity.this, TranslationActivity.class);
             intent.putExtra("chatId", chatId);
@@ -132,7 +123,6 @@ public class ChatActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Back button click listener
         backButton.setOnClickListener(v -> {
             startActivity(new Intent(ChatActivity.this, HomeActivity.class));
             finish();
@@ -144,16 +134,13 @@ public class ChatActivity extends AppCompatActivity {
             String timestamp = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
             ChatItem newMessage = new ChatItem(message, timestamp);
 
-            // Push message to Firebase
             messagesRef.push().setValue(newMessage)
                     .addOnSuccessListener(aVoid -> {
-                        // Update last message info in the chat summary
                         FirebaseDatabase database = FirebaseDatabase.getInstance("https://slution-24489-default-rtdb.europe-west1.firebasedatabase.app/");
                         DatabaseReference chatInfoRef = database.getReference("chats").child(chatId);
                         chatInfoRef.child("lastMessage").setValue(message);
                         chatInfoRef.child("time").setValue(timestamp);
 
-                        // Clear input field and scroll to bottom
                         messageEditText.setText("");
                         chatRecyclerView.scrollToPosition(messages.size());
                     })
@@ -196,7 +183,6 @@ public class ChatActivity extends AppCompatActivity {
             if (results != null && !results.isEmpty()) {
                 String recognizedText = results.get(0);
                 messageEditText.setText(recognizedText);
-                // Position cursor at the end
                 messageEditText.setSelection(recognizedText.length());
             }
         }

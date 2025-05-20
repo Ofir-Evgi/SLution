@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:text="@string/no_favorites"
             android:textStyle="bold"
-            android:textColor="#607D8B"
+            android:textColor="@color/blue_gray"
             android:textSize="20sp" />
 
         <ImageView

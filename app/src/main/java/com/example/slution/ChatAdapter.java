@@ -43,7 +43,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         holder.messageText.setText(item.getUserName());
         holder.messageTime.setText(item.getTime());
 
-        // הצג הודעה אחרונה רק במסך הבית
         if (context instanceof HomeActivity) {
             if (item.getLastMessage() != null && !item.getLastMessage().isEmpty()) {
                 holder.messagePreview.setText(item.getLastMessage());

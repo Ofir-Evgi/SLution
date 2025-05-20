@@ -9,7 +9,8 @@
     android:focusable="true"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"
-    app:strokeColor="#E0E0E0"
+    app:cardBackgroundColor="@color/white"
+    app:strokeColor="@color/gray_light2"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,19 +18,18 @@
         android:layout_height="wrap_content"
         android:padding="11dp">
 
-        <!-- Chat Avatar Circle -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/chat_avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="#E8F5F7"
+            android:background="@color/white"
             android:padding="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/no_messages"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="#00B2C9" />
+            app:tint="@color/green" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/chat_name"
@@ -38,8 +38,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="#212121"
+            android:maxLines="10"
+            android:textColor="@color/gray_dark"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@id/chat_time"
             app:layout_constraintStart_toEndOf="@id/chat_avatar"
@@ -50,7 +50,7 @@
             android:id="@+id/chat_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#9E9E9E"
+            android:textColor="@color/gray2"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/chat_name"
@@ -64,7 +64,7 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="#757575"
+            android:textColor="@color/gray_medium"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@id/star_icon"
             app:layout_constraintStart_toStartOf="@id/chat_name"
@@ -80,9 +80,8 @@
             app:layout_constraintBottom_toBottomOf="@id/chat_message_preview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/chat_message_preview"
-            app:tint="#E0E0E0" />
+            app:tint="@color/gray_light2" />
 
-        <!-- Unread Indicator Dot (optional) -->
         <View
             android:id="@+id/unread_indicator"
             android:layout_width="8dp"

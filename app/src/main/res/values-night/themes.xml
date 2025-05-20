@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SLution" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>

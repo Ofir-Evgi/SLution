@@ -7,7 +7,6 @@
     android:background="@color/white"
     tools:context=".HomeActivity">
 
-    <!-- Collapsing Toolbar with App Title and App Logo -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -38,8 +37,8 @@
 
                     <ImageView
                         android:id="@+id/app_logo"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
                         android:contentDescription="App Logo"
                         android:src="@drawable/app_icon" />
 
@@ -50,15 +49,15 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="SLution"
-                        android:textColor="@color/black"
-                        android:textSize="28sp"
+                        android:textColor="@color/green"
+                        android:textSize="30sp"
                         android:textStyle="bold"
                         android:fontFamily="@font/oleo_script_bold"/>
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/profile_button"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
                         android:contentDescription="Profile"
                         android:padding="8dp"
                         android:scaleType="centerCrop"
@@ -72,11 +71,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Communicate without barriers"
-                    android:textColor="#757575"
+                    android:textColor="@color/gray_medium"
+                    android:layout_marginLeft="18dp"
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <!-- Toolbar with title that appears when scrolled -->
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -87,7 +86,6 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Main Content - NestedScrollView for scrollable content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -101,7 +99,6 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="16dp">
 
-            <!-- Quick Actions Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +114,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <!-- New Chat Button -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/new_chat_card"
                     android:layout_width="0dp"
@@ -127,10 +123,10 @@
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="#00B2C9"
+                    app:cardBackgroundColor="@color/green"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="2dp"
-                    app:rippleColor="#33FFFFFF">
+                    app:rippleColor="@color/white_translucent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -144,20 +140,19 @@
                             android:layout_height="32dp"
                             android:contentDescription="Start New Chat"
                             android:src="@drawable/no_messages"
-                            app:tint="#FFFFFF" />
+                            app:tint="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="New Chat"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Favorites Button -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/favorites_card"
                     android:layout_width="0dp"
@@ -167,7 +162,7 @@
                     android:checkable="true"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="#E8F5F7"
+                    app:cardBackgroundColor="@color/light_blue_background"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="2dp">
 
@@ -183,7 +178,7 @@
                             android:layout_height="32dp"
                             android:contentDescription="Favorites"
                             android:src="@drawable/fav_icon"
-                            app:tint="#00B2C9" />
+                            app:tint="@color/green" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -197,7 +192,6 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <!-- Recent Conversations Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -219,12 +213,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View All"
-                    android:textColor="#00B2C9"
+                    android:textColor="@color/green"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Recent Conversations List -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recent_conversations_recycler"
                 android:layout_width="match_parent"
@@ -236,7 +229,6 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/item_chat_card" />
 
-            <!-- Empty State for No Conversations -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/empty_state_container"
                 android:layout_width="match_parent"
@@ -247,14 +239,14 @@
 
                 <ImageView
                     android:id="@+id/empty_state_image"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:contentDescription="No conversations yet"
                     android:src="@drawable/no_messages"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="#E0E0E0" />
+                    app:tint="@color/gray_light2" />
 
                 <TextView
                     android:id="@+id/empty_state_title"
@@ -262,7 +254,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="No conversations yet"
-                    android:textColor="#757575"
+                    android:textColor="@color/gray_medium"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -276,7 +268,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="32dp"
                     android:text="Start a new one to begin!"
-                    android:textColor="#9E9E9E"
+                    android:textColor="@color/gray2"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
