@@ -1,4 +1,5 @@
-# SLution  
+# SLution 
+
 A real-time sign language translation mobile app that uses camera-based hand detection and voice-to-text technologies to bridge communication gaps between signers and non-signers.
 
 ---
