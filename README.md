@@ -4,9 +4,13 @@ A real-time sign language translation mobile app that uses camera-based hand det
 
 ---
 
+## [Link to the code](https://drive.google.com/file/d/1nrKFS6GgoCD_VqAF1DIIabVd0v-LssH4/view?usp=sharing) 
+
+---
+
 ## Developed By  
-- **Ofir Evgi** – 207441346  
-- **Omer Shukroon** – 208540856  
+- **Ofir Evgi**  
+- **Omer Shukroon**  
 
 ---
 
@@ -90,7 +94,7 @@ Includes developers, system managers, and stakeholders responsible for:
 ## Non-Functional Requirements
 
 ### Performance
-- Real-time processing with a target delay of **1–3 seconds**  
+- Real-time processing with a target delay of **5-10 seconds**  
 - Gesture recognition accuracy: **≥90% under normal lighting and positioning**  
 
 ### Scalability
@@ -130,11 +134,28 @@ Includes developers, system managers, and stakeholders responsible for:
 
 ---
 
-## Machine Learning Integration (Coming Soon)
-SLution is being integrated with a custom-trained ML model that recognizes sign language gestures from live camera input using TensorFlow Lite.  
-The model runs locally on the device and will be seamlessly integrated into the translation screen for real-time feedback.  
+## Machine Learning Architecture Overview
 
-During testing, fallback options will be provided if the model is unavailable. This feature will be fully evaluated in a future release cycle.
+SLution uses a powerful **ensemble of custom-trained Convolutional Neural Network (CNN) models** to recognize American Sign Language (ASL) letters from real-time camera input. These models were trained from scratch on diverse and well-structured ASL datasets using **TensorFlow**, and deployed to the mobile application using **TensorFlow Lite** for efficient on-device inference.
+
+### How It Works
+
+- Each video frame captured by the device's camera is analyzed in real time by **four independent CNN models** running locally on the device.
+- Each model outputs a **softmax probability vector** representing its confidence across all possible ASL letters.
+- The outputs are **averaged across all models** to form a single prediction vector.
+- A letter is only displayed to the user once it has been **consistently predicted over 10 consecutive frames**, significantly improving stability and accuracy.
+
+### Model Architecture Highlights
+
+- Two base models operate on **64×64 pixel inputs**, optimized for speed on lower-end devices.
+- Two advanced models use **300×300 resolution** with **batch normalization** for improved precision.
+- All models include **multiple convolutional layers**, dropout regularization, and were trained using **data augmentation** to enhance generalization.
+
+### Current Status
+
+The models are fully integrated into the translation interface and run entirely **offline**, ensuring low latency and no dependency on cloud services. The fallback system allows users to continue using manual input or voice-to-text if camera-based recognition is unavailable.
+
+Future releases may explore extending recognition to full words or dynamic signs, and introducing support for other sign languages.
 
 ---
 
@@ -150,11 +171,11 @@ During testing, fallback options will be provided if the model is unavailable. T
 ---
 
 ## Screenshots  
-*See the `Application_Screens_README` file for full UI design and flows.*
+[See the `Application_Screens_README` file for full UI design and flows.](./docs/Application_Screens_README.md)
 
 ---
 
 ##  Note
-This is a final-year university project submitted to the Computer Science department. The codebase and machine learning model are developed independently and integrated into a unified mobile solution.
+This is a final-year project submitted to the Computer Science department. The codebase and machine learning model are developed independently and integrated into a unified mobile solution.
 
 ---
