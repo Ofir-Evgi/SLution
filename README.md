@@ -171,7 +171,7 @@ Future releases may explore extending recognition to full words or dynamic signs
 ---
 
 ## Screenshots  
-[See the `Application_Screens_README` file for full UI design and flows.](./docs/Application_Screens_README.md)
+See the [`Application_Screens_README`](./docs/Application_Screens_README.md)  file for full UI design and flows.
 
 ---
 
