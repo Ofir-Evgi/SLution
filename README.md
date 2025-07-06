@@ -4,7 +4,7 @@ A real-time sign language translation mobile app that uses camera-based hand det
 
 ---
 
-## [Link to the code](https://drive.google.com/file/d/1nrKFS6GgoCD_VqAF1DIIabVd0v-LssH4/view?usp=sharing) 
+## [Link to the code](https://drive.google.com/file/d/1SGqzc_kz5zUH4K8c5orE-jeOrSSsHcMh/view?usp=sharing)
 
 ---
 
