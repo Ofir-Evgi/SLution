@@ -2,6 +2,12 @@
 
 A real-time sign language translation mobile app that uses camera-based hand detection and voice-to-text technologies to bridge communication gaps between signers and non-signers.
 
+
+## Application Video
+
+https://github.com/user-attachments/assets/37157049-2a1d-4c9c-9133-de720696a47d
+
+
 ---
 
 ## [Link to the code](https://drive.google.com/file/d/1SGqzc_kz5zUH4K8c5orE-jeOrSSsHcMh/view?usp=sharing)
